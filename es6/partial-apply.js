@@ -1,17 +1,25 @@
-function partialApply(fn, ...args) {
-  return function(...newArgs) {
-    return fn(...(args.concat(newArgs)));
-  };
-}
-
+/**
+ * Save a function and any provided arguments
+ * Return a function that will continue to collect arguments until there are
+ * enough to fulfill fn, then invoke fn
+ * @param  {Function} fn
+ * @return {Function}    a function to be executed at a later time
+ */
 function partialApply(fn, ...initialArgs) {
-  const ar = fn.length; // save the amount of args the function expects
+  // save the amount of args the function expects
+  const ar = fn.length;
+  let args = initialArgs;
 
-  return function partial(...args) {
-    initialArgs = initialArgs.concat(args); // save new arguments
-    if (initialArgs.length >= ar) { // run function if we have them all
-      return fn(..initialArgs);
+  return function partial(...newArgs) {
+    // save new arguments
+    args = args.concat(newArgs);
+    // run function if we have all of the arguments
+    if (initialArgs.length >= ar) {
+      return fn(...initialArgs);
     }
-    return partial; // return function if we do not
+    // return function if we do not
+    return partial;
   };
 }
+
+module.exports = { partialApply };
