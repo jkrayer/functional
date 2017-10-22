@@ -17,4 +17,4 @@ function curry(fn, ar) {
   };
 }
 
-module.exports = { curry };
+module.exports = curry;
