@@ -1,16 +1,12 @@
 {
-  "extends": "eslint-config-airbnb",
   "env": {
-    "node": true
+    "mocha": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
-    "sourceType": "module",
+    "sourceType": "script",
     "ecmaFeatures": {
         "impliedStrict": true
       }
-  },
-  "rules": {
-    "comma-dangle": 0
   }
 }

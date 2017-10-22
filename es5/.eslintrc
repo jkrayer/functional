@@ -1,4 +1,14 @@
 {
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 5,
+    "sourceType": "script",
+    "ecmaFeatures": {
+        "impliedStrict": true
+      }
+  },
   "rules": {
     "comma-dangle": 0,
     "no-var": 0,
