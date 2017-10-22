@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./tests/*.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/jkrayer/functional#readme",
   "devDependencies": {
+    "chai": "4.1.2",
     "eslint": "4.9.0",
     "eslint-cli": "1.1.1",
     "eslint-config-airbnb": "16.1.0",
@@ -29,6 +30,8 @@
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jsx-a11y": "6.0.2",
     "eslint-plugin-react": "7.4.0",
-    "mocha": "4.0.1"
+    "mocha": "4.0.1",
+    "sinon": "4.0.1",
+    "sinon-chai": "2.14.0"
   }
 }

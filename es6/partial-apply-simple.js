@@ -11,4 +11,4 @@ function partialApply(fn, ...args) {
   };
 }
 
-module.exports = { partialApply };
+module.exports = partialApply;
