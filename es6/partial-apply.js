@@ -14,12 +14,12 @@ function partialApply(fn, ...initialArgs) {
     // save new arguments
     args = args.concat(newArgs);
     // run function if we have all of the arguments
-    if (initialArgs.length >= ar) {
-      return fn(...initialArgs);
+    if (args.length >= ar) {
+      return fn(...args);
     }
     // return function if we do not
     return partial;
   };
 }
 
-module.exports = { partialApply };
+module.exports = partialApply;
