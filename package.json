@@ -1,0 +1,34 @@
+{
+  "name": "functional",
+  "version": "1.0.0",
+  "description": "Functional Javascript Utils for Self-Education",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkrayer/functional.git"
+  },
+  "keywords": [
+    "functional",
+    "javascript"
+  ],
+  "author": "Jim Krayer <jameskrayer@yahoo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jkrayer/functional/issues"
+  },
+  "homepage": "https://github.com/jkrayer/functional#readme",
+  "devDependencies": {
+    "eslint": "4.9.0",
+    "eslint-cli": "1.1.1",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-react": "7.4.0",
+    "mocha": "4.0.1"
+  }
+}
