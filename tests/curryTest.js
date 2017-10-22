@@ -39,7 +39,6 @@ describe('curry', () => {
 
     it(fn.name + ' should return the original function result when all expected args are supplied', () => {
       expect(fn(sumSpy)(1)(3)).to.equal(4);
-      expect(fn(sumSpy)()(3)()(3)).to.equal(6);
     });
 
     it(fn.name + ' should handle multi-variate functions', () => {
