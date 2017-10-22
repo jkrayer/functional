@@ -1,3 +1,10 @@
+/**
+ * Save a reference to a function and return a single arity function until
+ * the proper amount of arguments are reached
+ * @param  {Function} fn
+ * @param  {Number}   ar [description]
+ * @return {Function}
+ */
 function curry(fn, ar) {
   var arity = ar || fn.length;
   var args = [];
@@ -7,5 +14,7 @@ function curry(fn, ar) {
       return fn.apply(null, args);
     }
     return curried;
-  }
+  };
 }
+
+module.exports = { curry };
