@@ -1,48 +1,42 @@
-const expect = require('chai').expect;
-const sinon = require('sinon');
+const { expect } = require('chai');
 const curry = require('../src/curry');
 
 require('chai').use(require('sinon-chai'));
 
 describe('curry', () => {
-  const applyFns = [curry];
-
-  function sum(a, b) {
-    return a + b;
-  }
+  const sum = curry((a, b, c) => a + b + c);
 
   function sumAll(...args) {
-    return args.reduce(function(acc, val) {
-      return acc + val;
-    }, 0);
+    return args.reduce((acc, n) => acc + n, 0);
   }
 
-  applyFns.forEach(function(fn) {
-    const sumSpy = sinon.spy(sum);
-    const sumAllSpy = sinon.spy(sumAll);
+  it('should return functions until all args are gathered', () => {
+    expect(sum).to.be.an.instanceof(Function);
+    expect(sum(1)).to.be.an.instanceof(Function);
+    expect(sum(1)(2)).to.be.an.instanceof(Function);
+    expect(sum(1)(2)(3)).to.equal(6);
+  });
 
-    it(fn.name + ' should return a function with an arity of 1', () => {
-      const curriedSum = fn(sumSpy);
-      const one = curriedSum(1);
+  it('should not require butted braces ()()', () => {
+    expect(sum(1, 2)).to.be.an.instanceof(Function);
+    expect(sum(1, 2, 3)).to.equal(6);
+  });
 
-      expect(curriedSum).to.be.an.instanceof(Function);
-      expect(curriedSum.length).to.equal(1);
-      expect(one).to.be.an.instanceof(Function);
-      expect(one.length).to.equal(1);
-    });
+  it('should return a value when all arguments are gathered', () => {
+    expect(sum(1, 2, 3)).to.equal(6);
+    expect(sum(1, 2)(3)).to.equal(6);
+    expect(sum(1)(2)(3)).to.equal(6);
+  });
 
-    it(fn.name + ' should return the original function result', () => {
-      expect(fn(sumSpy)(1)(3)).to.equal(4);
-      expect(sumSpy.calledWith(1, 3)).to.be.true;
-    });
+  it('should throw if arity is < 1', () => {
+    expect(() => curry(sumAll)).to.throw('curry expects the provided function to have at least one argument, or set arity explicity');
+  });
 
-    it(fn.name + ' should return the original function result when all expected args are supplied', () => {
-      expect(fn(sumSpy)(1)(3)).to.equal(4);
-    });
+  it('should complete the function when the provided number of argument is met', () => {
+    const sumFour = curry(sumAll, 4);
+    const sumFive = curry(sumAll, 5);
 
-    it(fn.name + ' should handle multi-variate functions', () => {
-      expect(fn(sumAll, 5)(1)(2)(3)(4)(5)).to.equal(15);
-      expect(fn(sumAll, 3)(1)(3)(5)).to.equal(9);
-    });
+    expect(sumFour(1)(2)(3)(4)).to.equal(10);
+    expect(sumFive(1)(2)(3)(4)(5)).to.equal(15);
   });
 });
