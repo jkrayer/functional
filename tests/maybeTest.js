@@ -12,7 +12,6 @@ describe('Maybe', () => {
     expect(m.isNothing).to.be.an.instanceof(Function);
     expect(m.map).to.be.an.instanceof(Function);
     expect(m.flatMap).to.be.an.instanceof(Function);
-    expect(m.join).to.be.an.instanceof(Function);
     expect(m.value).to.equal('foo');
   });
 
@@ -24,7 +23,6 @@ describe('Maybe', () => {
     expect(m.isNothing).to.be.an.instanceof(Function);
     expect(m.map).to.be.an.instanceof(Function);
     expect(m.flatMap).to.be.an.instanceof(Function);
-    expect(m.join).to.be.an.instanceof(Function);
     expect(m.value).to.equal('bar');
   });
 
@@ -53,7 +51,6 @@ describe('Maybe', () => {
 
     expect(m).to.be.an.instanceof(Maybe);
     expect(n).to.be.an.instanceof(Maybe);
-    expect(m.join()).to.equal(n.join());
   });
 
   it('calling `flatMap` should apply the function to the stored value and return the result', () => {
@@ -61,14 +58,6 @@ describe('Maybe', () => {
 
     expect(m).to.be.a('number');
     expect(m).to.equal(4);
-  });
-
-  it('calling `join` should return the stored value', () => {
-    const m = Maybe.of(1);
-    const n = Maybe.of('foo');
-
-    expect(m.join()).to.equal(1);
-    expect(n.join()).to.equal('foo');
   });
 
   it('should NOT throw type errors', () => {

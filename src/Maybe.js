@@ -57,14 +57,6 @@ class Maybe {
 
     return fn(this.value);
   }
-
-  /**
-   * Get the stored value
-   * @return {Any}
-   */
-  join() {
-    return this.value;
-  }
 }
 
 module.exports = Maybe;
