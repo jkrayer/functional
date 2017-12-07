@@ -11,7 +11,7 @@ describe('Maybe', () => {
     expect(m).to.be.an.instanceof(Maybe);
     expect(m.isNothing).to.be.an.instanceof(Function);
     expect(m.map).to.be.an.instanceof(Function);
-    expect(m.reduce).to.be.an.instanceof(Function);
+    expect(m.flatMap).to.be.an.instanceof(Function);
     expect(m.join).to.be.an.instanceof(Function);
     expect(m.value).to.equal('foo');
   });
@@ -23,7 +23,7 @@ describe('Maybe', () => {
     expect(m).to.be.an.instanceof(Maybe);
     expect(m.isNothing).to.be.an.instanceof(Function);
     expect(m.map).to.be.an.instanceof(Function);
-    expect(m.reduce).to.be.an.instanceof(Function);
+    expect(m.flatMap).to.be.an.instanceof(Function);
     expect(m.join).to.be.an.instanceof(Function);
     expect(m.value).to.equal('bar');
   });
@@ -56,8 +56,8 @@ describe('Maybe', () => {
     expect(m.join()).to.equal(n.join());
   });
 
-  it('calling `reduce` should apply the function to the stored value and return the result', () => {
-    const m = Maybe.of(1).reduce(a => a + 3);
+  it('calling `flatMap` should apply the function to the stored value and return the result', () => {
+    const m = Maybe.of(1).flatMap(a => a + 3);
 
     expect(m).to.be.a('number');
     expect(m).to.equal(4);
@@ -74,7 +74,7 @@ describe('Maybe', () => {
   it('should NOT throw type errors', () => {
     var m = Maybe.of(null);
 
-    expect(() => m.reduce(a => a.split(''))).to.not.throw;
-    expect(() => m.reduce(parseInt)).to.not.throw;
+    expect(() => m.flatMap(a => a.split(''))).to.not.throw;
+    expect(() => m.flatMap(parseInt)).to.not.throw;
   });
 });

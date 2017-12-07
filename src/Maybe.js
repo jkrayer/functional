@@ -6,7 +6,7 @@
  * let val = 'value that may be null or undefined';
  * if (val) { val = changeVal(val); }
  * With this:
- * let val = Maybe.of('value that may be null or undefined').reduce(changeVal);
+ * let val = Maybe.of('value that may be null or undefined').flatMap(changeVal);
  * @type {[type]}
  */
 class Maybe {
@@ -49,9 +49,8 @@ class Maybe {
    * Apply the supplied function to the stored value and return the result
    * @param  {Function} fn function to apply against the stored value
    * @return {Any}
-   * AKA `chain` or `flatMap`
    */
-  reduce(fn) {
+  flatMap(fn) {
     if (this.isNothing()) {
       return null;
     }
@@ -75,7 +74,4 @@ module.exports = Maybe;
  * AFAIK a `Maybe` in true FP would return either a `Just` or a `Nothing`
  * depending on the value supplied in the constructor. This `Maybe` does
  * not wrap the value in additional constructs but may in the future.
- * The methods are named similar to existing methods on the javascript Array
- * object. It is my hope that naming the methods thusly will aid the reader
- * in understanding their use.
  */
