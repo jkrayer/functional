@@ -70,4 +70,11 @@ describe('Maybe', () => {
     expect(m.join()).to.equal(1);
     expect(n.join()).to.equal('foo');
   });
+
+  it('should NOT throw type errors', () => {
+    var m = Maybe.of(null);
+
+    expect(() => m.reduce(a => a.split(''))).to.not.throw;
+    expect(() => m.reduce(parseInt)).to.not.throw;
+  });
 });
