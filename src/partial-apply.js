@@ -1,14 +1,13 @@
 /**
- * Save a function and any provided arguments
- * Returns a function that will call fn when invoked
- * @param  {Function} fn
- * @param  {Array}    args
- * @return {Function}      a function to be executed at a later time
+ * Save a function and any provided arguments. Return a function that can take
+ * additional arguments. The returned function executes `fn` with all provided
+ * arguments in order from left to right.
+ * @param  {Function} fn    a function to save for later
+ * @param  {Array}    args  some or all of the arguments to use with `fn`
+ * @return {Function}       a closure with access to `fn` and `args`
  */
 function partialApply(fn, ...args) {
-  return function partial(...newArgs) {
-    return fn(...(args.concat(newArgs)));
-  };
+  return (...newArgs) => fn(...(args.concat(newArgs)));
 }
 
 module.exports = partialApply;
