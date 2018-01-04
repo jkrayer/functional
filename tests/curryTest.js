@@ -1,12 +1,11 @@
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const curry5 = require('../es5/curry');
 const curry6 = require('../es6/curry');
 
 require('chai').use(require('sinon-chai'));
 
 describe('curry', () => {
-  const applyFns = [curry5, curry6];
+  const applyFns = [curry6];
 
   function sum(a, b) {
     return a + b;

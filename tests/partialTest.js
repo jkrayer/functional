@@ -1,12 +1,11 @@
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const partial5 = require('../es5/partial-apply');
 const partial6 = require('../es6/partial-apply');
 
 require('chai').use(require('sinon-chai'));
 
 describe('partialApply', () => {
-  const applyFns = [partial5, partial6];
+  const applyFns = [partial6];
 
   function sum(a, b) {
     return a + b;

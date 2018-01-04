@@ -1,6 +1,5 @@
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const partial5 = require('../es5/partial-apply-simple');
 const partial6 = require('../es6/partial-apply-simple');
 
 require('chai').use(require('sinon-chai'));
@@ -10,7 +9,7 @@ describe('simple partialApply', () => {
     return a + b;
   }
 
-  [partial5, partial6].forEach(function(fn) {
+  [partial6].forEach(function(fn) {
     const sumSpy = sinon.spy(sum);
 
     it(fn.name + ' should return a function', () => {
