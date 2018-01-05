@@ -1,10 +1,10 @@
-import { CURRY_ERROR_MESSAGE } from './errors';
+const CURRY_ERROR_MESSAGE = require('./errors').CURRY_ERROR_MESSAGE;
 
 /**
  * Curry is a closure over a function reference that returns a new closure over
  * passed arguments until all of the orginal function's (fn) arguments have been
  * collected. When all of the arguments have been collected curry returns The
- * result of the orginal function with the gathered arguments.
+ * result of the orginal function with the collected arguments.
  *
  * function sum (a, b, c, d, e) {
  *   return a + b + c + d + e;
@@ -43,4 +43,4 @@ function curry(fn, arity = fn.length) {
   }());
 }
 
-export default curry;
+module.exports = curry;
