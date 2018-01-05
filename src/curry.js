@@ -1,20 +1,46 @@
-/**
-* Save a reference to a function and return a single arity function until
-* the proper amount of arguments are reached
- * @param  {Function} fn
- * @param  {Number}   ar The expected number of arguments
- * @return {Function}
- */
-function curry(fn, ar) {
-  const arity = ar || fn.length;
-  const args = [];
+import { CURRY_ERROR_MESSAGE } from './errors';
 
-  return function curried(a) {
-    if (args.push(a) >= arity) {
+/**
+ * Curry is a closure over a function reference that returns a new closure over
+ * passed arguments until all of the orginal function's (fn) arguments have been
+ * collected. When all of the arguments have been collected curry returns The
+ * result of the orginal function with the gathered arguments.
+ *
+ * function sum (a, b, c, d, e) {
+ *   return a + b + c + d + e;
+ * }
+ *
+ * const c = curry(sum); // c is a reference to curried inside of a closure create by curry and c
+ * const d = c(1);       // d is a reference to curried inside of a closure create by curry and c
+ * const e = d(2);       // e is a reference to curried inside of a closure create by curry and c
+ * e(3)(4)(5) = 21
+ * e(3, 4)(5) = 21
+ * e(3)(4, 5) = 21
+ * e(3, 4, 5) = 21
+ *
+ * e is still a reference to curried inside of a closure create by curry and c.
+ * e still "remembers" the arguments provided to c and d; 1 and 2 respectively.
+ *
+ * @param  {Function} fn
+ * @param  {Integer}  arity    optional: number of arguments fn expects
+ * @return {Function | Result}
+ */
+function curry(fn, arity = fn.length) {
+
+  if (arity < 1) {
+    throw new TypeError(CURRY_ERROR_MESSAGE);
+  }
+
+  return (function c(...args) {
+
+    if (args.length >= arity) {
       return fn(...args);
     }
-    return curried;
-  };
+
+    return function curried(...a) {
+      return c(...args.concat(a));
+    };
+  }());
 }
 
-module.exports = curry
+export default curry;
