@@ -1,25 +1,23 @@
 /**
- * Save a function and any provided arguments
- * Return a function that will continue to collect arguments until there are
- * enough to fulfill fn, then invoke fn
- * @param  {Function} fn
- * @return {Function}    a function to be executed at a later time
+ * partialApply creates a closure over the passed function and arguments and
+ * returns a function with access to the closure. When the returned function
+ * is called it returns the result of the original function with the initial
+ * and new arguments applied from left to right.
+ *
+ * function sum (a, b, c, d, e) {
+ *   return a + b + c + d + e;
+ * }
+ *
+ * const c = partialApply(sum, 3); // c is a lambda than can access sum and 3
+ * const d = c(1);                 // d is 4
+ * const e = c(2);                 // e is 5
+ *
+ * @param  {Function} fn    a function to save for later
+ * @param  {Array}    args  some initial arguments to use with `fn`
+ * @return {Function}       a function with access to the closure created by partialApply
  */
-function partialApply(fn, ...initialArgs) {
-  // save the amount of args the function expects
-  const ar = fn.length;
-  let args = initialArgs;
-
-  return function partial(...newArgs) {
-    // save new arguments
-    args = args.concat(newArgs);
-    // run function if we have all of the arguments
-    if (args.length >= ar) {
-      return fn(...args);
-    }
-    // return function if we do not
-    return partial;
-  };
+function partialApply(fn, ...args) {
+  return (...newArgs) => fn(...args.concat(newArgs));
 }
 
 module.exports = partialApply;
