@@ -9,6 +9,7 @@
  * let val = Maybe.of('value that may be null or undefined').flatMap(changeVal);
  * @type {[type]}
  */
+
 class Maybe {
   constructor(value) {
     this.value = value;
@@ -38,11 +39,7 @@ class Maybe {
    * @return {Object}      Maybe
    */
   map(fn) {
-    if (this.isNothing()) {
-      return Maybe.of(null);
-    }
-
-    return Maybe.of(fn(this.value));
+    return this.isNothing() ? Maybe.of(null) : Maybe.of(fn(this.value));
   }
 
   /**
@@ -51,11 +48,16 @@ class Maybe {
    * @return {Any}
    */
   flatMap(fn) {
-    if (this.isNothing()) {
-      return null;
-    }
+    return this.isNothing() ? null fn(this.value);
+  }
 
-    return fn(this.value);
+  orElse(def) {
+    return this.isNothing() ? def : this.value;
+  }
+
+  // when this value is a function apply it to the value of the passed maybe
+  apply(m) {
+    return !m.isNothing() && !this.isNothing() ? Maybe.of(this.value(m.flatMap(x => x))) : Maybe.of(null);
   }
 }
 
@@ -67,3 +69,5 @@ module.exports = Maybe;
  * depending on the value supplied in the constructor. This `Maybe` does
  * not wrap the value in additional constructs but may in the future.
  */
+
+// identity

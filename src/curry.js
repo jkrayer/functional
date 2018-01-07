@@ -1,4 +1,4 @@
-const CURRY_ERROR_MESSAGE = require('./errors').CURRY_ERROR_MESSAGE;
+const { CURRY_ERROR_MESSAGE } = require('./errors');
 
 /**
  * Curry is a closure over a function reference that returns a new closure over
@@ -26,13 +26,11 @@ const CURRY_ERROR_MESSAGE = require('./errors').CURRY_ERROR_MESSAGE;
  * @return {Function | Result}
  */
 function curry(fn, arity = fn.length) {
-
   if (arity < 1) {
     throw new TypeError(CURRY_ERROR_MESSAGE);
   }
 
   return (function c(...args) {
-
     if (args.length >= arity) {
       return fn(...args);
     }

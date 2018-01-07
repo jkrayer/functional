@@ -1,16 +1,13 @@
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const sinon = require('sinon');
 const curry = require('../src/curry');
-const CURRY_ERROR_MESSAGE = require('../src/errors').CURRY_ERROR_MESSAGE;
+const { CURRY_ERROR_MESSAGE } = require('../src/errors');
 
 require('chai').use(require('sinon-chai'));
 
 describe('curry', () => {
-
   function sumAll(...args) {
-    return args.reduce(function(acc, val) {
-      return acc + val;
-    }, 0);
+    return args.reduce((acc, val) => acc + val, 0);
   }
 
   const sumAllSpy = sinon.spy(sumAll);

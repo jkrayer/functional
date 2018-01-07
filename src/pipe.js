@@ -1,4 +1,4 @@
-const PIPE_ERROR_MESSAGE = require('./errors').PIPE_ERROR_MESSAGE;
+const { PIPE_ERROR_MESSAGE } = require('./errors');
 
 /**
  * Pipe saves an array of functions and returns a unary function. When the
@@ -8,7 +8,6 @@ const PIPE_ERROR_MESSAGE = require('./errors').PIPE_ERROR_MESSAGE;
  * @return {[type]}     A unary function
  */
 function pipe(...fns) {
-
   if (!fns.every(fn => typeof fn === 'function')) {
     throw new TypeError(PIPE_ERROR_MESSAGE);
   }
