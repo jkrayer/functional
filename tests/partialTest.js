@@ -13,7 +13,11 @@ describe('partialApply', () => {
   const sumSpy = sinon.spy(sum);
 
   it('should return a function', () => {
-    expect(partial(sumSpy, 1)).to.be.an.instanceof(Function);
+    const summer = partial(sumSpy, 1);
+
+    expect(summer).to.be.an.instanceof(Function);
+    expect(summer(2)).to.equal(3);
+    expect(summer(4)).to.equal(5);
   });
 
   it('should return the original function result', () => {
