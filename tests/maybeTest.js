@@ -12,7 +12,9 @@ describe('Maybe', () => {
     expect(m.isNothing).to.be.an.instanceof(Function);
     expect(m.map).to.be.an.instanceof(Function);
     expect(m.flatMap).to.be.an.instanceof(Function);
-    expect(m.value).to.equal('foo');
+    expect(m.orElse).to.be.an.instanceof(Function);
+    expect(m.apply).to.be.an.instanceof(Function);
+    expect(m._v).to.equal('foo');
   });
 
   it('calling maybe.of should instantiate a new object', () => {
@@ -20,18 +22,13 @@ describe('Maybe', () => {
 
     expect(m).to.be.an.instanceof(Object);
     expect(m).to.be.an.instanceof(Maybe);
-    expect(m.isNothing).to.be.an.instanceof(Function);
-    expect(m.map).to.be.an.instanceof(Function);
-    expect(m.flatMap).to.be.an.instanceof(Function);
-    expect(m.value).to.equal('bar');
+    expect(m._v).to.equal('bar');
   });
 
   it('calling isNothing should return a boolean', () => {
     const m = Maybe.of(null);
     const n = Maybe.of('foo');
 
-    expect(m).to.be.an.instanceof(Object);
-    expect(m).to.be.an.instanceof(Maybe);
     expect(m.isNothing()).to.equal(true);
     expect(n.isNothing()).to.equal(false);
   });
@@ -42,15 +39,7 @@ describe('Maybe', () => {
     expect(m).to.be.an.instanceof(Object);
     expect(m).to.be.an.instanceof(Maybe);
     expect(m.isNothing()).to.equal(false);
-    expect(m.value).to.equal(4);
-  });
-
-  it('calling `Maybe().map(fn).map(fn)` === `Maybe.map(composedFn)`', () => {
-    const m = Maybe.of(1).map(a => a + 3).map(a => a + 5);
-    const n = Maybe.of(1).map(a => [x => x + 3, x => x + 5].reduce((acc, fn) => fn(acc), a));
-
-    expect(m).to.be.an.instanceof(Maybe);
-    expect(n).to.be.an.instanceof(Maybe);
+    expect(m._v).to.equal(4);
   });
 
   it('calling `flatMap` should apply the function to the stored value and return the result', () => {
@@ -58,6 +47,23 @@ describe('Maybe', () => {
 
     expect(m).to.be.a('number');
     expect(m).to.equal(4);
+  });
+
+  it('calling `orElse` should return the stored value or the supplied value', () => {
+    const m = Maybe.of(1);
+    const n = Maybe.of(null);
+
+    expect(m.orElse('default')).to.be.a('number').and.to.equal(1);
+    expect(n.orElse('default')).to.be.a('string').and.to.equal('default');
+  });
+
+
+  it('calling `Maybe().map(fn).map(fn)` === `Maybe.map(composedFn)`', () => {
+    const m = Maybe.of(1).map(a => a + 3).map(a => a + 5);
+    const n = Maybe.of(1).map(a => [x => x + 3, x => x + 5].reduce((acc, fn) => fn(acc), a));
+
+    expect(m).to.be.an.instanceof(Maybe);
+    expect(n).to.be.an.instanceof(Maybe);
   });
 
   it('should NOT throw type errors', () => {
