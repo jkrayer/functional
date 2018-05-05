@@ -30,15 +30,15 @@ function curry(fn, arity = fn.length) {
     throw new TypeError(CURRY_ERROR_MESSAGE);
   }
 
-  return (function c(...args) {
-    if (args.length >= arity) {
+  return (function c(ar, ...args) {
+    if (args.length >= ar) {
       return fn(...args);
     }
 
     return function curried(...a) {
-      return c(...args.concat(a));
+      return c(ar, ...args.concat(a));
     };
-  }());
+  }(arity));
 }
 
 module.exports = curry;
