@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const { expect } = require('chai');
 const Maybe = require('../src/Maybe');
 
@@ -67,9 +68,11 @@ describe('Maybe', () => {
   });
 
   it('should NOT throw type errors', () => {
-    var m = Maybe.of(null);
+    const m = Maybe.of(null);
 
     expect(() => m.flatMap(a => a.split(''))).to.not.throw;
     expect(() => m.flatMap(parseInt)).to.not.throw;
   });
 });
+
+/* eslint-enable no-underscore-dangle */

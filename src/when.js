@@ -8,8 +8,9 @@
 function when(fn, x) {
   let count = x;
 
-  return function() {
-    return --count === 0 ? fn.apply(this, arguments) : void 0;
+  return function w(...args) {
+    count -= 1;
+    return count === 0 ? fn.apply(this, args) : undefined;
   };
 }
 

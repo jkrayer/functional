@@ -35,5 +35,4 @@ describe('wonce', () => {
 
     expect(cb).to.have.been.calledTwice;
   });
-
 });
