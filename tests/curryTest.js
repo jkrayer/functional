@@ -17,9 +17,9 @@ describe('curry', () => {
     const curriedSum2 = curriedSum(1);
 
     expect(curriedSum).to.be.an.instanceof(Function);
-    expect(curriedSum.name).to.equal('curried');
+    expect(curriedSum.name).to.equal(''); // curried
     expect(curriedSum2).to.be.an.instanceof(Function);
-    expect(curriedSum2.name).to.equal('curried');
+    expect(curriedSum2.name).to.equal('');
     expect(curriedSum2(2)).to.equal(3);
   });
 
