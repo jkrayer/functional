@@ -28,7 +28,7 @@ const { isConstructor, isNothing } = require('./helpers');
  * @class
  */
 function Functor(a) {
-  if (!isConstructor(this, Functor)) return new Functor(a); // Address need for instantiation with "new"
+  if (!isConstructor(this, Functor)) return Functor.of(a); // Address need for instantiation with "new"
 
   Object.defineProperty(this, 'v', { value: a, writable: false }); // 1.
 }
@@ -53,9 +53,9 @@ Functor.of = function(a) {
  */
 Functor.prototype.map = function(fn) {
   return isNothing(this.v) ? this
-    : Array.isArray(this.v) ? new Functor(this.v.map(fn)) // 2. 4.
-    : typeof this.v === 'object' ? new Functor(Object.keys(this.v).reduce((a, k) => (a[k] = fn(this.v[k]), a), {})) // 3. 4.
-    : new Functor(fn(this.v));
+    : Array.isArray(this.v) ? Functor.of(this.v.map(fn)) // 2. 4.
+    : typeof this.v === 'object' ? Functor.of(Object.keys(this.v).reduce((a, k) => (a[k] = fn(this.v[k]), a), {})) // 3. 4.
+    : Functor.of(fn(this.v));
 };
 
 /**
@@ -66,9 +66,9 @@ Functor.prototype.map = function(fn) {
  * @return {Functor}
  */
 Functor.prototype.clone = function(val) {
-  return Array.isArray(this.v) ? new Functor(this.v.map(a => val)) // 4.
-    : typeof this.v === 'object' ? new Functor(Object.keys(this.v).reduce((a, k) => (a[k] = val, a), {})) // 4.
-    : new Functor(val);
+  return Array.isArray(this.v) ? Functor.of(this.v.map(a => val)) // 4.
+    : typeof this.v === 'object' ? Functor.of(Object.keys(this.v).reduce((a, k) => (a[k] = val, a), {})) // 4.
+    : Functor.of(val);
 }
 
 module.exports = Functor;
