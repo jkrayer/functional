@@ -14,12 +14,6 @@ const { isConstructor, isNothing } = require('./helpers');
  *
  * 1. Prevent the stored value from being re-assigned like Functor.v = newVal.
  *    Remeber some JS types can still be mutated via methods like Array.push.
- * 2. [] is a functor in JS but could be lifted in to this Functor. To my way of
- *    thinking that is probably unnecessary but its hard to say what data type
- *    might wind up in Functor or a type that implements Functor at a later time.
- * 3. As above {} can be lifted into a Functor and may be in the future but
- *    should it be?
- * 4. Shallow. This implementation does not operate on deeply nested values [[]] or {{}}
  */
 
 /**
@@ -52,23 +46,7 @@ Functor.of = function(a) {
  * @method
  */
 Functor.prototype.map = function(fn) {
-  return isNothing(this.v) ? this
-    : Array.isArray(this.v) ? Functor.of(this.v.map(fn)) // 2. 4.
-    : typeof this.v === 'object' ? Functor.of(Object.keys(this.v).reduce((a, k) => (a[k] = fn(this.v[k]), a), {})) // 3. 4.
-    : Functor.of(fn(this.v));
+  return isNothing(this.v) ? this : Functor.of(fn(this.v));
 };
-
-/**
- * Clone, named (<$) in Haskell, copies the current functor and replaces the
- * stored value with the supplied value
- * a -> f(b) -> f(a)
- * @param  {*} val
- * @return {Functor}
- */
-Functor.prototype.clone = function(val) {
-  return Array.isArray(this.v) ? Functor.of(this.v.map(a => val)) // 4.
-    : typeof this.v === 'object' ? Functor.of(Object.keys(this.v).reduce((a, k) => (a[k] = val, a), {})) // 4.
-    : Functor.of(val);
-}
 
 module.exports = Functor;

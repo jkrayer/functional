@@ -29,22 +29,9 @@ describe('Functor', () => {
 
   // 4. Methods
   it('Create a new functor b, from a functor a using the results of calling a function on every value in the functor a.', () => {
-    expect(Functor.of(8).map(timesTwo).v).to.equal(16);
-    expect(Functor.of([2, 3, 4]).map(timesTwo).v).to.deep.equal([4, 6, 8]);
-    expect(Functor.of({three: 3, four: 4}).map(timesTwo).v).to.deep.equal({three: 6, four: 8});
+    const fun = Functor.of(8);
+
+    expect(fun.map(timesTwo).v).to.equal(16);
+    expect(fun.v).to.equal(8);
   });
-
-  it('Create a new functor a, from a functor b by replacing all of the values in the functor b with a given value of type a.', () => {
-    const i = Functor.of(9);
-    const a = Functor.of([1, 2, 3]);
-    const o = Functor.of({a: 6, b: 'z'});
-
-    expect(i.clone('a').v).to.equal('a');
-    expect(i.v).to.equal(9);
-    expect(a.clone(4).v).to.deep.equal([4, 4, 4]);
-    expect(a.v).to.deep.equal([1, 2, 3]);
-    expect(o.clone(7).v).to.deep.equal({a: 7, b: 7});
-    expect(o.v).to.deep.equal({a: 6, b: 'z'});
-  });
-
 });
