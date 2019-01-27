@@ -34,6 +34,16 @@ function Functor(a) {
 }
 
 /**
+ * Lifts the given value into the Functor
+ * @static
+ * @param  {Any} a
+ * @return {Object}
+ */
+Functor.of = function(a) {
+  return new Functor(a);
+};
+
+/**
  * Applies the supplied function to the stored value and returns a new Functor
  * constaining the result.
  * Function -> f(a) -> f(b)
