@@ -50,4 +50,12 @@ Functor.prototype.map = function(fn) {
   return Functor.of(fn(this.v));
 };
 
+/**
+ * [description]
+ * @return {[type]} [description]
+ */
+Functor.prototype.toString = function() {
+  return `Functor.of(${this.v})`;
+};
+
 module.exports = Functor;

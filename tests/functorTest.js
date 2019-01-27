@@ -28,10 +28,16 @@ describe('Functor', () => {
   });
 
   // 4. Methods
-  it('Create a new functor b, from a functor a using the results of calling a function on every value in the functor a.', () => {
+  it('Creates a new functor b, from a functor a using the results of calling a function on every value in the functor a.', () => {
     const fun = Functor.of(8);
 
     expect(fun.map(timesTwo).v).to.equal(16);
     expect(fun.v).to.equal(8);
+  });
+
+  it('Should show the container and value as a string', () => {
+    const fun = Functor.of(8);
+
+    expect(fun.toString()).to.equal('Functor.of(8)');
   });
 });
