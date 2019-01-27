@@ -1,4 +1,4 @@
-const { isConstructor, isNothing } = require('./helpers');
+const { isConstructor } = require('./helpers');
 
 /**
  * The basic functor wraps a value and provides an interface (fmap) for applying
@@ -18,7 +18,7 @@ const { isConstructor, isNothing } = require('./helpers');
 
 /**
  * Creates a new Functor
- * * -> f(*)
+ * * -> functor(*)
  * @class
  */
 function Functor(a) {
@@ -29,6 +29,7 @@ function Functor(a) {
 
 /**
  * Lifts the given value into the Functor
+ * * -> functor(*)
  * @static
  * @param  {Any} a
  * @return {Object}
@@ -40,13 +41,13 @@ Functor.of = function(a) {
 /**
  * Applies the supplied function to the stored value and returns a new Functor
  * constaining the result.
- * Function -> f(a) -> f(b)
+ * Function -> funtor(a) -> functor(b)
  * @param  {Function} fn
  * @return {Functor}
  * @method
  */
 Functor.prototype.map = function(fn) {
-  return isNothing(this.v) ? this : Functor.of(fn(this.v));
+  return Functor.of(fn(this.v));
 };
 
 module.exports = Functor;
