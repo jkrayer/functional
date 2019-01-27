@@ -8,10 +8,7 @@
 function when(fn, x) {
   let count = x;
 
-  return function w(...args) {
-    count -= 1;
-    return count === 0 ? fn.apply(this, args) : undefined;
-  };
+  return (...args) => (count -= 1) === 0 ? fn.apply(this, args) : void 0;
 }
 
 module.exports = when;

@@ -7,12 +7,7 @@
 function once(fn) {
   let isDone = false;
 
-  return function o(...args) {
-    if (isDone) { return; }
-
-    isDone = true;
-    fn.apply(this, args);
-  };
+  return (...args) => isDone ? void 0 : (isDone = true, fn.apply(this, args));
 }
 
 module.exports = once;
