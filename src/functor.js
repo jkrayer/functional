@@ -51,7 +51,7 @@ Functor.of = function(a) {
  * @return {Functor}
  * @method
  */
-Functor.prototype.fmap = function(fn) {
+Functor.prototype.map = function(fn) {
   return isNothing(this.v) ? this
     : Array.isArray(this.v) ? new Functor(this.v.map(fn)) // 2. 4.
     : typeof this.v === 'object' ? new Functor(Object.keys(this.v).reduce((a, k) => (a[k] = fn(this.v[k]), a), {})) // 3. 4.
