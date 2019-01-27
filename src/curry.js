@@ -35,9 +35,7 @@ function curry(fn, arity = fn.length) {
       return f(...args);
     }
 
-    return function curried(...a) {
-      return c(f, ar, ...args.concat(a));
-    };
+    return (...a) => c(f, ar, ...args.concat(a));
   }(fn, arity));
 }
 
