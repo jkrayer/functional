@@ -18,7 +18,29 @@ function isNothing (a) {
   return a === null || a === void 0;
 }
 
+/**
+ * Walk the keys of the supplied object and return the value of the last key or
+ * undefined if at any point in the search a key does not exist.
+ *
+ * Note that it is uncommon but possible for the penultimate key to have the value
+ * undefined. While I find it bad practice to have [undefined, undefined, ...] or
+ * { a: undefined, b: void 0 } your mileage may vary.
+ *
+ * @param  {Array} keys          valid Object and Array keys
+ * @param  {Object|Array} object subject of search
+ * @return {Any}                 the value of of the last key || undefined
+ */
+function path(keys, object) {
+  return keys.reduce(
+    (acc, key) => {
+      return isNothing(acc) || !acc.hasOwnProperty(key) ? void 0 : acc[key]
+    },
+    object
+  );
+}
+
 module.exports = {
   isConstructor,
-  isNothing
+  isNothing,
+  path
 };
