@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 const { expect } = require('chai');
 const Maybe = require('../src/Maybe');
 
@@ -12,10 +11,9 @@ describe('Maybe', () => {
     expect(m).to.be.an.instanceof(Maybe);
     expect(m.isNothing).to.be.an.instanceof(Function);
     expect(m.map).to.be.an.instanceof(Function);
-    expect(m.flatMap).to.be.an.instanceof(Function);
-    expect(m.orElse).to.be.an.instanceof(Function);
-    expect(m.apply).to.be.an.instanceof(Function);
-    expect(m._v).to.equal('foo');
+    expect(m.fmap).to.be.an.instanceof(Function);
+    // expect(m.apply).to.be.an.instanceof(Function);
+    expect(m.v).to.equal('foo');
   });
 
   it('calling maybe.of should instantiate a new object', () => {
@@ -23,7 +21,7 @@ describe('Maybe', () => {
 
     expect(m).to.be.an.instanceof(Object);
     expect(m).to.be.an.instanceof(Maybe);
-    expect(m._v).to.equal('bar');
+    expect(m.v).to.equal('bar');
   });
 
   it('calling isNothing should return a boolean', () => {
@@ -40,24 +38,15 @@ describe('Maybe', () => {
     expect(m).to.be.an.instanceof(Object);
     expect(m).to.be.an.instanceof(Maybe);
     expect(m.isNothing()).to.equal(false);
-    expect(m._v).to.equal(4);
+    expect(m.v).to.equal(4);
   });
 
-  it('calling `flatMap` should apply the function to the stored value and return the result', () => {
-    const m = Maybe.of(1).flatMap(a => a + 3);
+  it('calling `fmap` should apply the function to the stored value and return the result', () => {
+    const m = Maybe.of(1).fmap(a => a + 3);
 
     expect(m).to.be.a('number');
     expect(m).to.equal(4);
   });
-
-  it('calling `orElse` should return the stored value or the supplied value', () => {
-    const m = Maybe.of(1);
-    const n = Maybe.of(null);
-
-    expect(m.orElse('default')).to.be.a('number').and.to.equal(1);
-    expect(n.orElse('default')).to.be.a('string').and.to.equal('default');
-  });
-
 
   it('calling `Maybe().map(fn).map(fn)` === `Maybe.map(composedFn)`', () => {
     const m = Maybe.of(1).map(a => a + 3).map(a => a + 5);
@@ -75,4 +64,5 @@ describe('Maybe', () => {
   });
 });
 
+/* eslint-disable no-underscore-dangle */
 /* eslint-enable no-underscore-dangle */

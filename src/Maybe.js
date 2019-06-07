@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+const { isConstructor } = require('./helpers');
 
 /**
  * Store any value that MAY BE `undefined` or `null` and use the attached methods
@@ -10,77 +10,53 @@
  * if (val) { val = changeVal(val); }
  * With this:
  * let val = Maybe.of('value that may be null or undefined').flatMap(changeVal);
- * @type {[type]}
+ *
+ * 1. Prevent the stored value from being re-assigned like Maybe.v = newVal.
+ *    Remeber some JS types can still be mutated via methods like Array.push.
  */
-class Maybe {
-  constructor(val) {
-    this._v = val;
-  }
+function Maybe (val) {
+  if (!isConstructor(this, Maybe)) return Maybe.of(val); // Address need for instantiation with "new"
 
-  /**
-   * Returns a new Maybe of the supplied `value` argument
-   *
-   * @param  {Any} value type to store in `Maybe`
-   * @return {Object}    New Maybe
-   */
-  static of(val) {
-    return new Maybe(val);
-  }
+  Object.defineProperty(this, 'v', { value: val, writable: false }); // 1.
+}
 
-  /**
-   * Determines if the stored value is `null` or `undefined`
-   *
-   * @return {Boolean}
-   */
-  isNothing() {
-    return this._v === null || typeof this._v === 'undefined';
-  }
+/**
+ * Returns a new Maybe of the supplied `value` argument
+ *
+ * @param  {Any} value type to store in `Maybe`
+ * @return {Object}    New Maybe
+ */
+Maybe.of = function of (val) {
+  return new Maybe(val);
+}
 
-  /**
-   * Apply the supplied function to the stored value and return a Maybe of the result
-   *
-   * @param  {Function} fn function to apply against the stored value
-   * @return {Object}      Maybe
-   */
-  map(fn) {
-    return this.isNothing() ? Maybe.of(null) : Maybe.of(fn(this._v));
-  }
+/**
+ * Determines if the stored value is `null` or `undefined`
+ *
+ * @return {Boolean}
+ */
+Maybe.prototype.isNothing = function isNothing() {
+  return this.v === null || typeof this.v === 'undefined';
+}
 
-  /**
-   * Apply the supplied function to the stored value and return the result
-   *
-   * @param  {Function} fn function to apply against the stored value
-   * @return {Any}
-   */
-  flatMap(fn) {
-    return this.isNothing() ? null : fn(this._v);
-  }
+/**
+ * Apply the supplied function to the stored value and return a Maybe of the result
+ *
+ * @param  {Function} fn function to apply against the stored value
+ * @return {Object}      Maybe
+ */
+Maybe.prototype.map = function map(fn) {
+  return this.isNothing() ? Maybe.of(null) : Maybe.of(fn(this.v));
+}
 
-  /**
-   * Return the value contained in this Maybe or the passed default if this
-   * contains nothing
-   *
-   * @param  {Any} def
-   * @return {Any}
-   */
-  orElse(def) {
-    return this.isNothing() ? def : this._v;
-  }
-
-  /**
-   * Apply the function contained in this Maybe to the value contained in the
-   * passed Maybe and return a maybe of the result.
-   *
-   * @param  {Maybe} m  A Maybe of a value
-   * @return {Maybe}
-   */
-  apply(m) {
-    return !m.isNothing() && !this.isNothing()
-      ? Maybe.of(this._v(m.flatMap(x => x)))
-      : Maybe.of(null);
-  }
+/**
+ * Apply the supplied function to the stored value and return the result
+ *
+ * @param  {Function} fn function to apply against the stored value
+ * @return {Any}
+ */
+Maybe.prototype.fmap = function fmap(fn) {
+  return this.isNothing() ? null : fn(this.v);
 }
 
 module.exports = Maybe;
-
-/* eslint-enable no-underscore-dangle */
