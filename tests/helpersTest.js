@@ -1,4 +1,3 @@
-const sinon = require('sinon');
 const { expect } = require('chai');
 const Functor = require('../src/functor');
 const {
@@ -6,8 +5,6 @@ const {
   isNothing,
   path
 } = require('../src/helpers');
-
-require('chai').use(require('sinon-chai'));
 
 describe('helpers', () => {
   describe('path', () => {
