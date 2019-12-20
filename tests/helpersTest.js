@@ -16,8 +16,8 @@ describe('helpers', () => {
     });
 
     it('should return undefined if any key in the path is undefined', () => {
-      expect(path(['a', 'b'], { a: { c: [{d: 1}] } })).to.equal(undefined);
-      expect(path(['a', 'c', 1], { a: { c: [{d: 1}] } })).to.equal(undefined);
+      expect(path(['a', 'b'], { a: { c: [{ d: 1 }] } })).to.equal(undefined);
+      expect(path(['a', 'c', 1], { a: { c: [{ d: 1 }] } })).to.equal(undefined);
     });
 
     it('should not find properties that are not own properties', () => {
@@ -27,7 +27,7 @@ describe('helpers', () => {
   });
 
   describe('isConstructor', () => {
-    const  a = Functor(1);
+    const a = Functor(1);
 
     it('should return true if the constructor is in the object\'s prototype chain', () => {
       expect(isConstructor(a, Functor)).to.equal(true);
@@ -43,13 +43,13 @@ describe('helpers', () => {
   describe('isNothing', () => {
     it('should return true if the value is null or undefined', () => {
       expect(isNothing(null)).to.equal(true);
-      expect(isNothing(void 0)).to.equal(true);
+      expect(isNothing(undefined)).to.equal(true);
     });
 
     it('should return false for any other value', () => {
       expect(isNothing('')).to.equal(false);
       expect(isNothing(0)).to.equal(false);
       expect(isNothing(NaN)).to.equal(false);
-    })
+    });
   });
 });

@@ -8,11 +8,11 @@ const { PIPE_ERROR_MESSAGE } = require('./errors');
  * @return {[type]}     A unary function
  */
 function pipe(...fns) {
-  if (!fns.every(fn => typeof fn === 'function')) {
+  if (!fns.every((fn) => typeof fn === 'function')) {
     throw new TypeError(PIPE_ERROR_MESSAGE);
   }
 
-  return a => fns.reduce((acc, fn) => fn(acc), a);
+  return (a) => fns.reduce((acc, fn) => fn(acc), a);
 }
 
 module.exports = pipe;

@@ -8,26 +8,26 @@ function Left(a) {
   Object.defineProperty(this, 'v', { value: a, writable: false }); // 1.
 }
 
-Left.of = function of (a) {
+Left.of = function of(a) {
   return new Left(a);
-}
+};
 
-Left.prototype.ap = function ap () {
+Left.prototype.ap = function ap() {
   return this;
-}
+};
 
-Left.prototype.chain = function chain () {
+Left.prototype.chain = function chain() {
   return this;
-}
+};
 
-Left.prototype.join = function () {
+Left.prototype.join = function join() {
   return this;
-}
+};
 
-Left.prototype.map = function map () {
+Left.prototype.map = function map() {
   return this;
-}
+};
 
 Left.prototype.toString = function toString() {
   return `Left(${this.v.toString()})`;
-}
+};

@@ -5,8 +5,8 @@ const identity = require('../src/identity');
 require('chai').use(require('sinon-chai'));
 
 describe('Functor', () => {
-  const timesTwo = x => x * 2;
-  const plusThree = x => x + 3;
+  const timesTwo = (x) => x * 2;
+  const plusThree = (x) => x + 3;
 
   // 3.1 Functor Laws https://wiki.haskell.org/Functor
   it('Functors must preserve identity morphisms', () => {
@@ -21,7 +21,7 @@ describe('Functor', () => {
 
   it('Functors preserve composition of morphisms', () => {
     const f = Functor.of(5);
-    const composed = x => timesTwo(plusThree(x));
+    const composed = (x) => timesTwo(plusThree(x));
 
     expect(f.map(plusThree).map(timesTwo).v).to.equal(16);
     expect(f.map(composed).v).to.equal(16);

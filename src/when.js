@@ -8,7 +8,8 @@
 function when(fn, x) {
   let count = x;
 
-  return (...args) => (count -= 1) === 0 ? fn.apply(this, args) : void 0;
+  // eslint-disable-next-line
+  return (...args) => ((count -= 1) === 0 ? fn.apply(this, args) : undefined);
 }
 
 module.exports = when;

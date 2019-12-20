@@ -14,8 +14,9 @@ const { isConstructor } = require('./helpers');
  * 1. Prevent the stored value from being re-assigned like Maybe.v = newVal.
  *    Remeber some JS types can still be mutated via methods like Array.push.
  */
-function Maybe (val) {
-  if (!isConstructor(this, Maybe)) return Maybe.of(val); // Address need for instantiation with "new"
+function Maybe(val) {
+  // Address need for instantiation with "new"
+  if (!isConstructor(this, Maybe)) return Maybe.of(val);
 
   Object.defineProperty(this, 'v', { value: val, writable: false }); // 1.
 }
@@ -26,9 +27,9 @@ function Maybe (val) {
  * @param  {Any} value type to store in `Maybe`
  * @return {Object}    New Maybe
  */
-Maybe.of = function of (val) {
+Maybe.of = function of(val) {
   return new Maybe(val);
-}
+};
 
 /**
  * Determines if the stored value is `null` or `undefined`
@@ -37,7 +38,7 @@ Maybe.of = function of (val) {
  */
 Maybe.prototype.isNothing = function isNothing() {
   return this.v === null || typeof this.v === 'undefined';
-}
+};
 
 /**
  * Apply the supplied function to the stored value and return a Maybe of the result
@@ -47,7 +48,7 @@ Maybe.prototype.isNothing = function isNothing() {
  */
 Maybe.prototype.map = function map(fn) {
   return this.isNothing() ? Maybe.of(null) : Maybe.of(fn(this.v));
-}
+};
 
 /**
  * Apply the supplied function to the stored value and return the result
@@ -57,6 +58,6 @@ Maybe.prototype.map = function map(fn) {
  */
 Maybe.prototype.fmap = function fmap(fn) {
   return this.isNothing() ? null : fn(this.v);
-}
+};
 
 module.exports = Maybe;

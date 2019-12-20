@@ -14,9 +14,11 @@ function isConstructor(object, constructor) {
  * @param  {Any}  a
  * @return {Boolean}
  */
-function isNothing (a) {
-  return a === null || a === void 0;
+function isNothing(a) {
+  return a === null || a === undefined;
 }
+
+// const isOwnProperty = Object.prototype.hasOwnProperty.call;
 
 /**
  * Walk the keys of the supplied object and return the value of the last key or
@@ -32,9 +34,7 @@ function isNothing (a) {
  */
 function path(keys, object) {
   return keys.reduce(
-    (acc, key) => {
-      return isNothing(acc) || !acc.hasOwnProperty(key) ? void 0 : acc[key]
-    },
+    (acc, key) => (isNothing(acc) || !acc.hasOwnProperty(key) ? undefined : acc[key]),
     object
   );
 }

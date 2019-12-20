@@ -7,7 +7,8 @@
 function once(fn) {
   let isDone = false;
 
-  return (...args) => isDone ? void 0 : (isDone = true, fn.apply(this, args));
+  // eslint-disable-next-line
+  return (...args) => (isDone ? undefined : (isDone = true, fn.apply(this, args)));
 }
 
 module.exports = once;

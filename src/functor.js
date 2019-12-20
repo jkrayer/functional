@@ -22,7 +22,8 @@ const { isConstructor } = require('./helpers');
  * @class
  */
 function Functor(a) {
-  if (!isConstructor(this, Functor)) return Functor.of(a); // Address need for instantiation with "new"
+  // Address need for instantiation with "new"
+  if (!isConstructor(this, Functor)) return Functor.of(a);
 
   Object.defineProperty(this, 'v', { value: a, writable: false }); // 1.
 }
@@ -34,7 +35,7 @@ function Functor(a) {
  * @param  {Any} a
  * @return {Object}
  */
-Functor.of = function(a) {
+Functor.of = function of(a) {
   return new Functor(a);
 };
 
@@ -46,7 +47,7 @@ Functor.of = function(a) {
  * @return {Functor}
  * @method
  */
-Functor.prototype.map = function(fn) {
+Functor.prototype.map = function map(fn) {
   return Functor.of(fn(this.v));
 };
 
@@ -54,7 +55,7 @@ Functor.prototype.map = function(fn) {
  * [description]
  * @return {[type]} [description]
  */
-Functor.prototype.toString = function() {
+Functor.prototype.toString = function toString() {
   return `Functor.of(${this.v})`;
 };
 
