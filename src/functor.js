@@ -42,7 +42,7 @@ Functor.of = function of(a) {
 /**
  * Applies the supplied function to the stored value and returns a new Functor
  * constaining the result.
- * Function -> funtor(a) -> functor(b)
+ * Function -> functor(a) -> functor(b)
  * @param  {Function} fn
  * @return {Functor}
  * @method
