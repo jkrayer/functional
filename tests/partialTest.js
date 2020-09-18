@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const partial = require('../src/partial-apply');
+const partial = require('../src/partial');
 
 require('chai').use(require('sinon-chai'));
 
