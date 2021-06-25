@@ -16,7 +16,8 @@ const { isConstructor } = require('./helpers');
  * @constructor
  */
 function Applicative(a) {
-  if (!isConstructor(this, Applicative)) return Applicative.of(a); // Address need for instantiation with "new"
+  // Address need for instantiation with "new"
+  if (!isConstructor(this, Applicative)) return Applicative.of(a);
 
   Object.defineProperty(this, 'v', { value: a, writable: false }); // 1.
 }

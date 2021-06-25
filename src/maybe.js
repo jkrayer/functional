@@ -1,4 +1,4 @@
-const { isConstructor } = require('./helpers');
+const { isConstructor } = require("./helpers");
 
 /**
  * Store any value that MAY BE `undefined` or `null` and use the attached methods
@@ -18,7 +18,7 @@ function Maybe(val) {
   // Address need for instantiation with "new"
   if (!isConstructor(this, Maybe)) return Maybe.of(val);
 
-  Object.defineProperty(this, 'v', { value: val, writable: false }); // 1.
+  Object.defineProperty(this, "v", { value: val, writable: false }); // 1.
 }
 
 /**
@@ -37,7 +37,7 @@ Maybe.of = function of(val) {
  * @return {Boolean}
  */
 Maybe.prototype.isNothing = function isNothing() {
-  return this.v === null || typeof this.v === 'undefined';
+  return this.v === null || typeof this.v === "undefined";
 };
 
 /**
@@ -62,54 +62,53 @@ Maybe.prototype.fmap = function fmap(fn) {
 
 module.exports = Maybe;
 
-
 // isNil:: Any -> Boolean
-const isNil = x => x == null || x == undefined;
+const isNil = (x) => x == null || x == undefined;
 
 const Just = (a) => {
   return {
-    map: f => Maybe(f(a)),
-    chain: f => f(a),
+    map: (f) => Maybe(f(a)),
+    chain: (f) => f(a),
     extract: () => a,
-    bind: f => Maybe(f(a).extract())
-    toString: () => `Just(${a})`
+    bind: (f) => Maybe(f(a).extract()),
+    toString: () => `Just(${a})`,
   };
-}
-Just.of = a => Just(a);
+};
+Just.of = (a) => Just(a);
 
 const Nothing = (a) => {
   return {
     map: () => Nothing(a),
-    chain: f => f(a),
+    chain: (f) => f(a),
     extract: () => a,
-    bind: f => Maybe(f(a).extract())
-    toString: () => `Nothing(${a})`
+    bind: (f) => Maybe(f(a).extract()),
+    toString: () => `Nothing(${a})`,
   };
-}
-Nothing.of = x => Nothing(null);
+};
+Nothing.of = (x) => Nothing(null);
 
 const Maybe = (a) => {
   return {
-    map: f => Maybe(f(a)),
-    chain: f => f(a),
+    map: (f) => Maybe(f(a)),
+    chain: (f) => f(a),
     extract: () => a,
-    bind: f => Maybe(f(a).extract())
-    toString: () => `Maybe(${a})`
+    bind: (f) => Maybe(f(a).extract()),
+    toString: () => `Maybe(${a})`,
   };
 };
 
-Maybe.of = a => Maybe(a);
-Maybe.fromNullable = a => isNil(a) ? Nothing.of(a) : Just.of(a);
+Maybe.of = (a) => Maybe(a);
+Maybe.fromNullable = (a) => (isNil(a) ? Nothing.of(a) : Just.of(a));
 Maybe.Nothing = Nothing.of;
-Maybe.Just = a => Just.of(a);
+Maybe.Just = (a) => Just.of(a);
 
-function Maybe (val) {
+function Maybe(val) {
   return {
-    map: f => Maybe(f(val)),
-    chain: f => this.map(f).join(),
+    map: (f) => Maybe(f(val)),
+    chain: (f) => this.map(f).join(),
     join: () => val,
-    orElse: d => isNil(val) ? Maybe(d) : this,
-    ap: maybe => maybe.map(val)
-  }
+    orElse: (d) => (isNil(val) ? Maybe(d) : this),
+    ap: (maybe) => maybe.map(val),
+  };
 }
 Maybe.of = (val) => Maybe(val);
