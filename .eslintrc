@@ -1,15 +1,17 @@
 {
   "extends": "eslint-config-airbnb",
   "env": {
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-        "impliedStrict": true
-      }
+      "impliedStrict": true
+    }
   },
+  "plugins": ["jest"],
   "rules": {
     "comma-dangle": 0,
     "no-prototype-builtins": 0

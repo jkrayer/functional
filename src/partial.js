@@ -12,8 +12,6 @@
  * @param  {Array}    args  some initial arguments to use with `fn`
  * @return {Function}       a function that executes over both args
  */
-const partial = (fn, ...args) => {
-  return (...moreArgs) => fn(...args, ...moreArgs);
-}
+const partial = (fn, ...args) => (...moreArgs) => fn(...args, ...moreArgs);
 
 module.exports = partial;
