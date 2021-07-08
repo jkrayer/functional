@@ -1,1 +1,5 @@
-console.log('Hello World!');
+import identity from './identity';
+
+export default {
+  identity,
+};
