@@ -1,4 +1,4 @@
-const identity = require('./');
+const identity = require('.');
 
 test('identity', () => {
   expect(identity(true)).toBe(true);
