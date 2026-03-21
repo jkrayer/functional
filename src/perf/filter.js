@@ -13,7 +13,8 @@ const filter = (f) => (xs) => {
 
 const faq = (f) => (xs) => xs.filter(f);
 
-const iterations = 1000000;
+// const iterations = 1000000;
+const iterations = 1;
 
 // Function #1: 45.629ms
 function f1() {

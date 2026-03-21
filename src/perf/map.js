@@ -13,7 +13,8 @@ const map = (f) => (xs) => {
 
 const maq = (f) => (xs) => xs.map(f);
 
-const iterations = 1000000;
+// const iterations = 1000000;
+const iterations = 1;
 
 // Function #1: 39.906ms
 function f1() {

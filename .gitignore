@@ -84,3 +84,7 @@ tmp
 
 # Custom
 lib
+
+# Excluded Combinators
+src/apply.*
+src/thrush.*
