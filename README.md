@@ -10,8 +10,6 @@ For better or worse Javascript has two values that represent the absence of a va
 
 ## Functions
 
-### adjust
-
 <!--
 ### apply ??
 
@@ -206,6 +204,31 @@ const add = (a, b) => a + b;
 reduce(add)(0)([1, 2, 3]); // => 6
 ```
 
+### setA
+
+`setA :: (a) -> (b -> c) -> [b] -> [c]`
+
+<small>Since v 0.0.0</small>
+
+Applies a function to the value at a given index and returns a new array with the modified value.
+
+```ts
+setA(2)(() => 10)([1, 2, 3, 4, 5]); // => [1, 2, 10, 4, 5]
+```
+
+### setO
+
+`setA :: (a) -> (b -> c) -> { a: b } -> { a: c }`
+
+<small>Since v 0.0.0</small>
+
+Applies the given function to the value at the given key and returns a new object with the modified value.
+
+```ts
+setO("c")(() => 10)({ a: 1, b: 2, c: 3, d: 4, e: 5 });
+// => { a: 1, b: 2, c: 10, d: 4, e: 5 }
+```
+
 ### split
 
 `split :: a -> b -> [c]`
@@ -229,9 +252,3 @@ A function that takes an object and returns an array of tuples.
 ```ts
 toPairs({ a: 1, b: 2 }); //=> [['a', 1], ['b', 2]]
 ```
-
-## To Add
-
-1. adjust
-2. replace
-3. toString
