@@ -1,1 +1,15 @@
+export { compose } from "./compose";
+export { constant } from "./constant";
+export { filter } from "./filter";
+export { fromPairs } from "./from-pairs";
+export { head } from "./head";
+export { identity } from "./identity";
 export { isNil } from "./isNil";
+export { join } from "./join";
+export { map } from "./map";
+export { partial } from "./partial";
+export { partialRight } from "./partial-right";
+export { path } from "./path";
+export { reduce } from "./reduce";
+export { split } from "./split";
+export { toPairs } from "./to-pairs";

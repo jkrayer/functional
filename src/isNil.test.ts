@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { isNil } from "./index";
+import { isNil } from "./isNil";
 
 test("returns true for null", () => {
   expect(isNil(null)).toBe(true);
