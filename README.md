@@ -248,8 +248,6 @@ Splits a string into an array of strings by the provided string or regular expre
 split(/,\s?/)("1, 2,3"); // => ["1", 2", "3"]
 ```
 
-<!-- ### thrush -->
-
 ### toPairs
 
 `toPairs :: { a: b } -> [[a, b]]`
@@ -258,4 +256,23 @@ A function that takes an object and returns an array of tuples.
 
 ```ts
 toPairs({ a: 1, b: 2 }); //=> [['a', 1], ['b', 2]]
+```
+
+### toString
+
+`// toString :: (a) => b`
+
+A function that converts the supplied type to a string.
+
+```ts
+toString("hello"); // => "hello"
+toString(42); // => "42"
+toString(3.14); // => "3.14"
+toString(true); // => "true";
+toString({ key: "value" }); // => '{"key":"value"}'
+toString([1, 2, 3]); // => "1,2,3"
+toString([]); // => ""
+toString(null); // => "null"
+toString(undefined); // => "undefined"
+toString(() => "test"); // => '() => "test"'
 ```
