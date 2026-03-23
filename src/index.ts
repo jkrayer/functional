@@ -11,6 +11,7 @@ export { partial } from "./partial";
 export { partialRight } from "./partial-right";
 export { path } from "./path";
 export { reduce } from "./reduce";
+export { replace } from "./replace";
 export { setA, setO } from "./set";
 export { split } from "./split";
 export { toPairs } from "./to-pairs";

@@ -10,21 +10,6 @@ For better or worse Javascript has two values that represent the absence of a va
 
 ## Functions
 
-<!--
-### apply ??
-
-`apply :: (a -> b) -> a -> b`
-
-<small>Since v 0.0.0</small>
-
-Saves a reference to a function and returns a function that takes a single argument. Applies the provided to the original function.
-
-```ts
-const double = (x: number) => x * 2;
-apply(double)(5); //=> 10
-```
--->
-
 ### compose
 
 `compose :: (b -> c) -> (a -> b) -> a -> c`
@@ -202,6 +187,28 @@ Like `map`, `reduce` applies a function to each member of an array and returns a
 ```ts
 const add = (a, b) => a + b;
 reduce(add)(0)([1, 2, 3]); // => 6
+```
+
+### replace
+
+`replace :: (a) -> (b) -> (c) -> d`
+
+<small>Since v 0.0.0</small>
+
+Applies a search string or regular expressions (a) to a string (c) and replaces each match with a given string (b) then returns the result.
+
+```ts
+const fixSpaces = replace(/\s+/g)(" ");
+fixSpaces("This  is a  string   with bad  spaces.");
+// => "This is a string with bad spaces."
+// Practical
+const replaceSpaces = replace(/\s+/g);
+const replaceWithCommas = replaceSpaces(", ");
+const replaceWithSemis = replaceSpaces("; ");
+replaceWithCommas("This  is a  string   with bad  spaces.");
+// => "This, is, a, string, with, bad, spaces."
+replaceWithSemis("This  is a  string   with bad  spaces.");
+// => "This; is; a; string; with; bad; spaces."
 ```
 
 ### setA
